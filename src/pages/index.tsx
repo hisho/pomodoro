@@ -1,18 +1,11 @@
-import Head from 'next/head'
 import {VFC} from "react";
+import {Timer} from "@src/components";
 
 const IndexPage: VFC = () => {
-
   return (
-    <>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico"/>
-      </Head>
-      <main>
-        ああああああ
-      </main>
-    </>
+    <main className="px-5 w-full max-w-screen-lg mx-auto lg:px-10">
+      <Timer time={60 * 25}/>
+    </main>
   )
 }
 
