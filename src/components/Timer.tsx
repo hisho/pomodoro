@@ -1,15 +1,16 @@
-import {useEffect, VFC} from "react";
-import Head from "next/head";
+import {useEffect, VFC, useState} from "react";
 import {useTimer} from "@src/hooks";
 
 type TimerPropsType = {
-  time: number
+  timer: number[]
 }
 
 export const Timer: VFC<TimerPropsType> = (
   {
-    time
+    timer
   }) => {
+  const [index, setIndex] = useState(0);
+
   const {
     remaining,
     minutes,
@@ -19,7 +20,7 @@ export const Timer: VFC<TimerPropsType> = (
     reset,
     isDone,
     isRunning
-  } = useTimer(time);
+  } = useTimer(timer[0]);
 
   // //currentTimeが変わるたびにtitleを書き換える
   useEffect(() => {
@@ -27,11 +28,20 @@ export const Timer: VFC<TimerPropsType> = (
   }, [remaining]);
 
   useEffect(() => {
-    if (isDone) {
-      reset(3);
-      start();
+    if (!isDone) return;
+    const isLast = timer.length - 1 === index;
+    if (isLast) {
+      setIndex(0);
+    } else {
+      setIndex(prevState => prevState + 1);
     }
   }, [isDone]);
+
+  useEffect(() => {
+    if (!isDone) return;
+    reset(timer[index]);
+    start();
+  }, [index]);
 
   return (
     <>
