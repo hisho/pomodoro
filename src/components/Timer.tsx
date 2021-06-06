@@ -35,9 +35,6 @@ export const Timer: VFC<TimerPropsType> = (
 
   return (
     <>
-      <Head>
-        <title>Create Next App</title>
-      </Head>
       <div className="text-center font-bold text-8xl tabular-nums slashed-zero sm:text-9xl">
         <span>{minutes}</span>:<span>{seconds}</span>
       </div>

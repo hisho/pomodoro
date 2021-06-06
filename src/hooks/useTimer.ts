@@ -30,6 +30,7 @@ export const useTimer: useTimerType = (time) => {
   //スタートする関数
   const start = () => {
     //現在すでにカウントダウン中なら処理を中断する
+    if(currentTime === 0) return;
     if (intervalRef.current) return;
     intervalRef.current = setInterval(() => {
       updateTime(prevState => prevState - 1);
@@ -52,21 +53,17 @@ export const useTimer: useTimerType = (time) => {
     clearInterval(intervalRef.current);
     intervalRef.current = null;
     //新しい時間をセットする
-    setTimeout(() => {
-      updateTime(newTime);
-    }, 1000);
+    updateTime(newTime);
     //doneをfalseにする
     setDone(false);
   }
 
   // //タイマーの数値が0になったらカウントダウンを止めてdoneをtrueにする
   useEffect(() => {
-    const isTimeUp = currentTime <= 1;
+    const isTimeUp = currentTime === -1;
     if (isTimeUp) {
-      setTimeout(() => {
-        clearInterval(intervalRef.current);
-        setDone(true);
-      }, 1000)
+      clearInterval(intervalRef.current);
+      setDone(true);
     }
   }, [currentTime]);
 
