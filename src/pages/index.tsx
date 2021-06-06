@@ -30,6 +30,8 @@ const IndexPage: VFC = () => {
       type: 'break'
     },
   ];
+
+  //タイマーの配列のindexを管理するステート
   const [index,setIndex] = useState(0);
 
   return (
