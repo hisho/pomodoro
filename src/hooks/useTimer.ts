@@ -7,7 +7,9 @@ type useTimerType = (time: number) => {
   seconds: string
   start: () => void
   stop: () => void
+  reset: (newTime?: number) => void
   isDone: boolean
+  isRunning: boolean
 }
 
 export const useTimer: useTimerType = (time) => {
@@ -15,18 +17,10 @@ export const useTimer: useTimerType = (time) => {
   const [currentTime, updateTime] = useState(time);
   //setIntervalを保存するref
   const intervalRef = useRef(null);
-
+  //タイマーが終わったかどうか
   const [done, setDone] = useState(false);
-
-  //マウントするとタイマーをへらす
-  useEffect(() => {
-    intervalRef.current = setInterval(() => {
-      updateTime(prevState => prevState - 1);
-    }, 1000);
-    return () => {
-      clearInterval(intervalRef.current);
-    }
-  }, []);
+  //タイマーが動いているかどうか
+  const [running, setRunning] = useState(false);
 
   //分
   const currentMinutes = zeroPadding(Math.floor(currentTime / 60));
@@ -40,6 +34,7 @@ export const useTimer: useTimerType = (time) => {
     intervalRef.current = setInterval(() => {
       updateTime(prevState => prevState - 1);
     }, 1000);
+    setRunning(true);
   }
 
   //止める関数
@@ -48,14 +43,30 @@ export const useTimer: useTimerType = (time) => {
     if (!intervalRef.current) return;
     clearInterval(intervalRef.current);
     intervalRef.current = null;
+    setRunning(false);
+  }
+
+  //新しく時間を設定する関数
+  const reset = (newTime = time) => {
+    //intervalRef.currentをクリアにして止める
+    clearInterval(intervalRef.current);
+    intervalRef.current = null;
+    //新しい時間をセットする
+    setTimeout(() => {
+      updateTime(newTime);
+    }, 1000);
+    //doneをfalseにする
+    setDone(false);
   }
 
   // //タイマーの数値が0になったらカウントダウンを止めてdoneをtrueにする
   useEffect(() => {
-    const isTimeUp = currentTime <= 0;
+    const isTimeUp = currentTime <= 1;
     if (isTimeUp) {
-      clearInterval(intervalRef.current);
-      setDone(true);
+      setTimeout(() => {
+        clearInterval(intervalRef.current);
+        setDone(true);
+      }, 1000)
     }
   }, [currentTime]);
 
@@ -65,6 +76,8 @@ export const useTimer: useTimerType = (time) => {
     seconds: currentSeconds,
     start,
     stop,
+    reset,
     isDone: done,
+    isRunning: running
   }
 }

@@ -16,13 +16,22 @@ export const Timer: VFC<TimerPropsType> = (
     seconds,
     start,
     stop,
-    isDone
+    reset,
+    isDone,
+    isRunning
   } = useTimer(time);
 
   // //currentTimeが変わるたびにtitleを書き換える
   useEffect(() => {
     document.title = `⏳${minutes}:${seconds}`
   }, [remaining]);
+
+  useEffect(() => {
+    if (isDone) {
+      reset(3);
+      start();
+    }
+  }, [isDone]);
 
   return (
     <>
@@ -32,8 +41,11 @@ export const Timer: VFC<TimerPropsType> = (
       <div className="text-center font-bold text-8xl tabular-nums slashed-zero sm:text-9xl">
         <span>{minutes}</span>:<span>{seconds}</span>
       </div>
-      <button type="button" onClick={start}>start</button>
-      <button type="button" onClick={stop}>stop</button>
+      {isRunning ? (
+        <button type="button" onClick={stop}>stop</button>
+      ) : (
+        <button type="button" onClick={start}>start</button>
+      )}
     </>
   )
 }
