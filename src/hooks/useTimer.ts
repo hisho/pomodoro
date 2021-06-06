@@ -60,7 +60,7 @@ export const useTimer: useTimerType = (time) => {
 
   // //タイマーの数値が0になったらカウントダウンを止めてdoneをtrueにする
   useEffect(() => {
-    const isTimeUp = currentTime === -1;
+    const isTimeUp = currentTime <= -1;
     if (isTimeUp) {
       clearInterval(intervalRef.current);
       setDone(true);
