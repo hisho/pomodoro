@@ -56,6 +56,11 @@ export const Timer: VFC<TimerPropsType> = (
     start();
   }, [index]);
 
+  const onReset = () => {
+    setIndex(0);
+    reset(timers[0].time);
+  }
+
   return (
     <>
       <div className="text-center font-bold text-8xl tabular-nums slashed-zero sm:text-9xl">
@@ -66,6 +71,7 @@ export const Timer: VFC<TimerPropsType> = (
       ) : (
         <button type="button" onClick={start}>start</button>
       )}
+      <button type="button" onClick={onReset}>reset</button>
     </>
   )
 }
