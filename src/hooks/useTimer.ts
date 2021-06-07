@@ -56,6 +56,8 @@ export const useTimer: useTimerType = (time) => {
     updateTime(newTime);
     //doneをfalseにする
     setDone(false);
+    //runningをfalseにする
+    setRunning(false);
   }
 
   // //タイマーの数値が0になったらカウントダウンを止めてdoneをtrueにする
