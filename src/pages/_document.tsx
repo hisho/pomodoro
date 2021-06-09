@@ -25,7 +25,7 @@ class MyDocument extends Document {
           <meta name="application-name" content={manifest.name}/>
           <meta name="theme-color" content={manifest.theme_color}/>
           <meta name="description" content={manifest.description}/>
-          <link rel="icon" href="/favicon.ico"/>
+          <link id="favicon" rel="icon" href="/favicon.ico"/>
           <link rel="manifest" href="/manifest.json"/>
         </Head>
         <body>
