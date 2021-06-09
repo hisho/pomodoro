@@ -3,10 +3,13 @@ import {timerType} from "@src/components/type";
 
 const timerState = (timerIndex, currentIndex) => {
   if (timerIndex === currentIndex) {
+    //current
     return 'bg-red-500'
   } else if (timerIndex > currentIndex) {
+    //will
     return 'bg-green-500'
   } else {
+    //done
     return 'bg-gray-300'
   }
 }
