@@ -29,12 +29,12 @@ const IndexPage: VFC = () => {
   });
 
   //ポモドーロの配列のindexを管理するステート
-  const [pomodoroIndex,setPomodoroIndex] = useState(0);
+  const [pomodoroIndex, setPomodoroIndex] = useState(0);
 
   return (
     <main className="px-5 w-full max-w-screen-lg mx-auto lg:px-10">
       <div>
-        <TimeLine pomodoros={pomodoros} pomodoroIndex={pomodoroIndex} />
+        <TimeLine pomodoros={pomodoros} pomodoroIndex={pomodoroIndex}/>
       </div>
       <Timer pomodoroIndex={pomodoroIndex} setPomodoroIndex={setPomodoroIndex} pomodoros={pomodoros}/>
     </main>
