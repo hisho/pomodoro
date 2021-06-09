@@ -1,11 +1,11 @@
 import {VFC} from "react";
-import {timerType} from "@src/components/type";
+import {pomodoroType} from "@src/components/type";
 
-const timerState = (timerIndex, currentIndex) => {
-  if (timerIndex === currentIndex) {
+const pomodoroState = (currentIndex, pomodoroIndex) => {
+  if (currentIndex === pomodoroIndex) {
     //current
     return 'bg-red-500'
-  } else if (timerIndex > currentIndex) {
+  } else if (currentIndex > pomodoroIndex) {
     //will
     return 'bg-green-500'
   } else {
@@ -15,21 +15,21 @@ const timerState = (timerIndex, currentIndex) => {
 }
 
 type TimeLinePropsType = {
-  timers: timerType[]
-  timerIndex: number
+  pomodoros: pomodoroType[]
+  pomodoroIndex: number
 }
 
 export const TimeLine:VFC<TimeLinePropsType> = (
   {
-    timers,
-    timerIndex
+    pomodoros,
+    pomodoroIndex
   }) => {
   return (
     <ol className="flex gap-x-2 w-full">
-      {timers.map((item, index) => (
+      {pomodoros.map((item, index) => (
         <li
-          className={`relative ${timerState(index, timerIndex)}`}
-          style={{width: `${1 / timers.length * 100}%`}}
+          className={`relative ${pomodoroState(index, pomodoroIndex)}`}
+          style={{width: `${1 / pomodoros.length * 100}%`}}
           key={`${item.time}_${index}`}
         >
           <div style={{paddingTop: '100%'}}/>

@@ -1,15 +1,15 @@
 import {useState, VFC} from "react";
 import {TimeLine, Timer} from "@src/components";
 import {convertMinutes} from "@src/helpers";
-import {timerType} from "@src/components/type";
+import {pomodoroType} from "@src/components/type";
 
-type createTimersType = (
+type createPomodorosType = (
   props: {
     work: ReturnType<typeof convertMinutes>
     break: ReturnType<typeof convertMinutes>
     longBreak: ReturnType<typeof convertMinutes>
-  }) => timerType[]
-const createTimers: createTimersType = (props) => {
+  }) => pomodoroType[]
+const createPomodoros: createPomodorosType = (props) => {
   return [...Array(8)].map((_, i, array) => {
     const isWork = i % 2 === 0;
     const isLast = array.length - 1 === i;
@@ -21,21 +21,22 @@ const createTimers: createTimersType = (props) => {
 }
 
 const IndexPage: VFC = () => {
-  const timers = createTimers({
+  //ポモドーロの配列
+  const pomodoros = createPomodoros({
     work: 25,
     break: 5,
     longBreak: 20
   });
 
-  //タイマーの配列のindexを管理するステート
-  const [index,setIndex] = useState(0);
+  //ポモドーロの配列のindexを管理するステート
+  const [pomodoroIndex,setPomodoroIndex] = useState(0);
 
   return (
     <main className="px-5 w-full max-w-screen-lg mx-auto lg:px-10">
       <div>
-        <TimeLine timers={timers} timerIndex={index} />
+        <TimeLine pomodoros={pomodoros} pomodoroIndex={pomodoroIndex} />
       </div>
-      <Timer index={index} setIndex={setIndex} timers={timers}/>
+      <Timer pomodoroIndex={pomodoroIndex} setPomodoroIndex={setPomodoroIndex} pomodoros={pomodoros}/>
     </main>
   )
 }

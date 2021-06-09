@@ -1,18 +1,18 @@
 import {useEffect, VFC, Dispatch, SetStateAction} from "react";
 import {useTimer} from "@src/hooks";
-import {timerType} from "@src/components/type";
+import {pomodoroType} from "@src/components/type";
 
 type TimerPropsType = {
-  index: number
-  setIndex: Dispatch<SetStateAction<number>>
-  timers: timerType[]
+  pomodoroIndex: number
+  setPomodoroIndex: Dispatch<SetStateAction<number>>
+  pomodoros: pomodoroType[]
 }
 
 export const Timer: VFC<TimerPropsType> = (
   {
-    index,
-    setIndex,
-    timers
+    pomodoroIndex,
+    setPomodoroIndex,
+    pomodoros
   }) => {
 
   const {
@@ -24,7 +24,7 @@ export const Timer: VFC<TimerPropsType> = (
     reset,
     isDone,
     isRunning
-  } = useTimer(timers[index].time);
+  } = useTimer(pomodoros[pomodoroIndex].time);
 
   // //currentTimeが変わるたびにtitleを書き換える
   useEffect(() => {
@@ -36,13 +36,13 @@ export const Timer: VFC<TimerPropsType> = (
     //タイマーが終了していない時は早期リターン
     if (!isDone) return;
     //indexがlastかどうか
-    const isLast = timers.length - 1 === index;
+    const isLast = pomodoros.length - 1 === pomodoroIndex;
     if (isLast) {
       //indexがlastの場合0をセットする
-      setIndex(0);
+      setPomodoroIndex(0);
     } else {
       //indexがlastではない場合は前のindex+1する
-      setIndex(prevState => prevState + 1);
+      setPomodoroIndex(prevState => prevState + 1);
     }
   }, [isDone]);
 
@@ -51,14 +51,14 @@ export const Timer: VFC<TimerPropsType> = (
     //タイマーが終了していない時は早期リターン
     if (!isDone) return;
     //タイマーに新しいタイムを登録する
-    reset(timers[index].time);
+    reset(pomodoros[pomodoroIndex].time);
     //スタートする
     start();
-  }, [index]);
+  }, [pomodoroIndex]);
 
   const onReset = () => {
-    setIndex(0);
-    reset(timers[0].time);
+    setPomodoroIndex(0);
+    reset(pomodoros[0].time);
   }
 
   return (
