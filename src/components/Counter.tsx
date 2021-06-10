@@ -26,7 +26,7 @@ export const Counter: VFC<CounterPropsType> = (
 
   return (
     <div>
-      {pomodoroCount}
+      現在: {pomodoroCount}ポモドーロ
     </div>
   )
 }
