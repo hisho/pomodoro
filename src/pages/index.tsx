@@ -1,5 +1,5 @@
 import {useState, VFC} from "react";
-import {TimeLine, Timer} from "@src/components";
+import {Counter, TimeLine, Timer} from "@src/components";
 import {convertMinutes} from "@src/helpers";
 import {pomodoroType} from "@src/components/type";
 
