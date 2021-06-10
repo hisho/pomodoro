@@ -5,16 +5,16 @@ import {pomodoroType} from "@src/components/type";
 
 type createPomodorosType = (
   props: {
-    work: ReturnType<typeof convertMinutes>
-    break: ReturnType<typeof convertMinutes>
-    longBreak: ReturnType<typeof convertMinutes>
+    work: number
+    break: number
+    longBreak: number
   }) => pomodoroType[]
 const createPomodoros: createPomodorosType = (props) => {
   return [...Array(8)].map((_, i, array) => {
     const isWork = i % 2 === 0;
     const isLast = array.length - 1 === i;
     return {
-      time: isLast ? props.longBreak : isWork ? props.break : props.break,
+      time: isLast ? convertMinutes(props.longBreak) : isWork ? convertMinutes(props.work) : convertMinutes(props.break),
       type: isWork ? 'work' : 'break'
     }
   })
