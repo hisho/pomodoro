@@ -37,6 +37,9 @@ const IndexPage: VFC = () => {
         <TimeLine pomodoros={pomodoros} pomodoroIndex={pomodoroIndex}/>
       </div>
       <Timer pomodoroIndex={pomodoroIndex} setPomodoroIndex={setPomodoroIndex} pomodoros={pomodoros}/>
+      <div>
+        <Counter pomodoroIndex={pomodoroIndex} pomodoros={pomodoros} />
+      </div>
     </main>
   )
 }
