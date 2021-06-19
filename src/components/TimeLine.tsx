@@ -1,7 +1,7 @@
 import { VFC } from 'react';
 import { pomodoroType } from '@src/components/type';
 
-const pomodoroState = (currentIndex, pomodoroIndex) => {
+const pomodoroState = (currentIndex: number, pomodoroIndex: number) => {
   if (currentIndex === pomodoroIndex) {
     //current
     return 'bg-red-500';
