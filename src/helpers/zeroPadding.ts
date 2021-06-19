@@ -1,4 +1,4 @@
-type zeroPaddingType = (number: number, fillString?: number) => string
+type zeroPaddingType = (number: number, fillString?: number) => string;
 
 /**
  * ゼロパディングするhelper関数
@@ -7,4 +7,4 @@ type zeroPaddingType = (number: number, fillString?: number) => string
  */
 export const zeroPadding: zeroPaddingType = (number, fillString = 2) => {
   return String(number).padStart(fillString, '0');
-}
+};

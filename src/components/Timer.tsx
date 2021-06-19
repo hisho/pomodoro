@@ -1,34 +1,24 @@
-import {useEffect, VFC, Dispatch, SetStateAction} from "react";
-import {useTimer} from "@src/hooks";
-import {pomodoroType} from "@src/components/type";
+import { useEffect, VFC, Dispatch, SetStateAction } from 'react';
+import { useTimer } from '@src/hooks';
+import { pomodoroType } from '@src/components/type';
 
 type TimerPropsType = {
-  pomodoroIndex: number
-  setPomodoroIndex: Dispatch<SetStateAction<number>>
-  pomodoros: pomodoroType[]
-}
+  pomodoroIndex: number;
+  setPomodoroIndex: Dispatch<SetStateAction<number>>;
+  pomodoros: pomodoroType[];
+};
 
-export const Timer: VFC<TimerPropsType> = (
-  {
-    pomodoroIndex,
-    setPomodoroIndex,
-    pomodoros
-  }) => {
-
-  const {
-    remaining,
-    minutes,
-    seconds,
-    start,
-    stop,
-    reset,
-    isDone,
-    isRunning
-  } = useTimer(pomodoros[pomodoroIndex].time);
+export const Timer: VFC<TimerPropsType> = ({
+  pomodoroIndex,
+  setPomodoroIndex,
+  pomodoros,
+}) => {
+  const { remaining, minutes, seconds, start, stop, reset, isDone, isRunning } =
+    useTimer(pomodoros[pomodoroIndex].time);
 
   // //currentTimeが変わるたびにtitleを書き換える
   useEffect(() => {
-    document.title = `${pomodoros[pomodoroIndex].type} - ${minutes}:${seconds}`
+    document.title = `${pomodoros[pomodoroIndex].type} - ${minutes}:${seconds}`;
     const favicon = document.getElementById('favicon');
     if (!favicon) return;
     if (!(favicon instanceof HTMLLinkElement)) return;
@@ -47,7 +37,7 @@ export const Timer: VFC<TimerPropsType> = (
       setPomodoroIndex(0);
     } else {
       //indexがlastではない場合は前のindex+1する
-      setPomodoroIndex(prevState => prevState + 1);
+      setPomodoroIndex((prevState) => prevState + 1);
     }
   }, [isDone]);
 
@@ -64,7 +54,7 @@ export const Timer: VFC<TimerPropsType> = (
   const onReset = () => {
     setPomodoroIndex(0);
     reset(pomodoros[0].time);
-  }
+  };
 
   return (
     <>
@@ -72,11 +62,17 @@ export const Timer: VFC<TimerPropsType> = (
         <span>{minutes}</span>:<span>{seconds}</span>
       </div>
       {isRunning ? (
-        <button type="button" onClick={stop}>stop</button>
+        <button type="button" onClick={stop}>
+          stop
+        </button>
       ) : (
-        <button type="button" onClick={start}>start</button>
+        <button type="button" onClick={start}>
+          start
+        </button>
       )}
-      <button type="button" onClick={onReset}>reset</button>
+      <button type="button" onClick={onReset}>
+        reset
+      </button>
     </>
-  )
-}
+  );
+};
