@@ -16,7 +16,9 @@ export const useTimer: useTimerType = (time) => {
   //現在のタイマーの数値
   const [currentTime, updateTime] = useState(time);
   //setIntervalを保存するref
-  const intervalRef = useRef(null);
+  const intervalRef = useRef<ReturnType<typeof window.setInterval> | null>(
+    null
+  );
   //タイマーが終わったかどうか
   const [done, setDone] = useState(false);
   //タイマーが動いているかどうか
@@ -50,6 +52,7 @@ export const useTimer: useTimerType = (time) => {
   //新しく時間を設定する関数
   const reset = (newTime = time) => {
     //intervalRef.currentをクリアにして止める
+    if (!intervalRef.current) return;
     clearInterval(intervalRef.current);
     intervalRef.current = null;
     //新しい時間をセットする
@@ -64,6 +67,7 @@ export const useTimer: useTimerType = (time) => {
   useEffect(() => {
     const isTimeUp = currentTime <= -1;
     if (isTimeUp) {
+      if (!intervalRef.current) return;
       clearInterval(intervalRef.current);
       setDone(true);
     }
