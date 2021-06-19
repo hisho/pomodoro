@@ -20,7 +20,7 @@ export const Counter: VFC<CounterPropsType> = ({
       //ポモドーロのカウントを増やす
       setPomodoroCount((prevState) => prevState + 1);
     }
-  }, [pomodoroIndex]);
+  }, [pomodoros, pomodoroIndex]);
 
   return <div>現在: {pomodoroCount}ポモドーロ</div>;
 };

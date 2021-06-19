@@ -24,7 +24,7 @@ export const Timer: VFC<TimerPropsType> = ({
     if (!(favicon instanceof HTMLLinkElement)) return;
     const icon = pomodoros[pomodoroIndex].type === 'work' ? '👨‍💻' : '☕️';
     favicon.href = `data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text x=%2250%%22 y=%2250%%22 style=%22dominant-baseline:central;text-anchor:middle;font-size:90px;%22>${icon}</text></svg>`;
-  }, [remaining]);
+  }, [remaining, pomodoroIndex, pomodoros, minutes, seconds]);
 
   //indexを更新する関数
   useEffect(() => {
@@ -39,7 +39,7 @@ export const Timer: VFC<TimerPropsType> = ({
       //indexがlastではない場合は前のindex+1する
       setPomodoroIndex((prevState) => prevState + 1);
     }
-  }, [isDone]);
+  }, [isDone, pomodoroIndex, pomodoros.length, setPomodoroIndex]);
 
   //タイマーを再セットする関数
   useEffect(() => {
@@ -49,7 +49,7 @@ export const Timer: VFC<TimerPropsType> = ({
     reset(pomodoros[pomodoroIndex].time);
     //スタートする
     start();
-  }, [pomodoroIndex]);
+  }, [pomodoroIndex, isDone, pomodoros, reset, start]);
 
   const onReset = () => {
     setPomodoroIndex(0);
