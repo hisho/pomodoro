@@ -2,6 +2,7 @@ const path = require('path');
 const withPWA = require('next-pwa');
 
 module.exports = withPWA({
+  reactStrictMode: true,
   /**
    * @see https://nextjs.org/docs/api-reference/next.config.js/exportPathMap#adding-a-trailing-slash
    */
