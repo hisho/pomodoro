@@ -1,14 +1,14 @@
 {
   "compilerOptions": {
-    "target": "ES2019",
+    "target": "es5",
     "lib": [
-      "DOM",
-      "DOM.Iterable",
-      "ES2020",
-      "ESNext"
+      "dom",
+      "dom.iterable",
+      "esnext"
     ],
+    "allowJs": true,
     "skipLibCheck": true,
-    "strict": false,
+    "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "esModuleInterop": true,
@@ -20,8 +20,7 @@
     "baseUrl": "./",
     "paths": {
       "@src/*": ["src/*"]
-    },
-    "allowJs": true
+    }
   },
   "include": [
     "next-env.d.ts",

@@ -1,17 +1,15 @@
-import {useEffect, useState, VFC} from "react";
-import {pomodoroType} from "@src/components/type";
+import { useEffect, useState, VFC } from 'react';
+import { pomodoroType } from '@src/components/type';
 
 type CounterPropsType = {
-  pomodoroIndex: number
-  pomodoros: pomodoroType[]
-}
+  pomodoroIndex: number;
+  pomodoros: pomodoroType[];
+};
 
-export const Counter: VFC<CounterPropsType> = (
-  {
-    pomodoroIndex,
-    pomodoros
-  }) => {
-
+export const Counter: VFC<CounterPropsType> = ({
+  pomodoroIndex,
+  pomodoros,
+}) => {
   //ポモドーロのカウント
   const [pomodoroCount, setPomodoroCount] = useState(0);
 
@@ -20,13 +18,9 @@ export const Counter: VFC<CounterPropsType> = (
     const isBreak = pomodoros[pomodoroIndex].type === 'break';
     if (isBreak) {
       //ポモドーロのカウントを増やす
-      setPomodoroCount(prevState => prevState + 1);
+      setPomodoroCount((prevState) => prevState + 1);
     }
-  }, [pomodoroIndex])
+  }, [pomodoros, pomodoroIndex]);
 
-  return (
-    <div>
-      現在: {pomodoroCount}ポモドーロ
-    </div>
-  )
-}
+  return <div>現在: {pomodoroCount}ポモドーロ</div>;
+};

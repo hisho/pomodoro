@@ -1,16 +1,16 @@
-import {useEffect, useRef, useState} from "react";
-import {zeroPadding} from "@src/helpers";
+import { useEffect, useRef, useState } from 'react';
+import { zeroPadding } from '@src/helpers';
 
 type useTimerType = (time: number) => {
-  remaining: number
-  minutes: string
-  seconds: string
-  start: () => void
-  stop: () => void
-  reset: (newTime?: number) => void
-  isDone: boolean
-  isRunning: boolean
-}
+  remaining: number;
+  minutes: string;
+  seconds: string;
+  start: () => void;
+  stop: () => void;
+  reset: (newTime?: number) => void;
+  isDone: boolean;
+  isRunning: boolean;
+};
 
 export const useTimer: useTimerType = (time) => {
   //現在のタイマーの数値
@@ -30,13 +30,13 @@ export const useTimer: useTimerType = (time) => {
   //スタートする関数
   const start = () => {
     //現在すでにカウントダウン中なら処理を中断する
-    if(currentTime === 0) return;
+    if (currentTime === 0) return;
     if (intervalRef.current) return;
     intervalRef.current = setInterval(() => {
-      updateTime(prevState => prevState - 1);
+      updateTime((prevState) => prevState - 1);
     }, 1000);
     setRunning(true);
-  }
+  };
 
   //止める関数
   const stop = () => {
@@ -45,7 +45,7 @@ export const useTimer: useTimerType = (time) => {
     clearInterval(intervalRef.current);
     intervalRef.current = null;
     setRunning(false);
-  }
+  };
 
   //新しく時間を設定する関数
   const reset = (newTime = time) => {
@@ -58,7 +58,7 @@ export const useTimer: useTimerType = (time) => {
     setDone(false);
     //runningをfalseにする
     setRunning(false);
-  }
+  };
 
   // //タイマーの数値が0になったらカウントダウンを止めてdoneをtrueにする
   useEffect(() => {
@@ -77,6 +77,6 @@ export const useTimer: useTimerType = (time) => {
     stop,
     reset,
     isDone: done,
-    isRunning: running
-  }
-}
+    isRunning: running,
+  };
+};
