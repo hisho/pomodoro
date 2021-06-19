@@ -1,6 +1,10 @@
 {
   "root": true,
-  "extends": ["next","prettier"],
+  "extends": [
+    "next",
+    "next/core-web-vitals",
+    "prettier"
+  ],
   "rules": {
     "@next/next/no-img-element": "off",
     "react/jsx-no-target-blank": "off"
