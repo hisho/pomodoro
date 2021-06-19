@@ -1,15 +1,25 @@
-import Document, {Html, Head, Main, NextScript, DocumentContext, DocumentInitialProps,} from "next/document";
 import manifest from '../../public/manifest.json';
+import Document, {
+  Html,
+  Head,
+  Main,
+  NextScript,
+  DocumentContext,
+  DocumentInitialProps
+} from 'next/document';
 
 class MyDocument extends Document {
-  static async getInitialProps(ctx: DocumentContext): Promise<DocumentInitialProps> {
-    return await Document.getInitialProps(ctx);
+  static async getInitialProps(ctx: DocumentContext):Promise<DocumentInitialProps> {
+    const initialProps = await Document.getInitialProps(ctx);
+
+    return { ...initialProps };
   }
 
   render() {
     return (
-      <Html lang="ja-JP" dir="ltr">
+      <Html lang="ja">
         <Head>
+          <meta name="format-detection" content="telephone=no" />
           {/* windows */}
           <meta name="msapplication-square70x70logo" content="/site-tile-70x70.png"/>
           <meta name="msapplication-square150x150logo" content="/site-tile-150x150.png"/>
