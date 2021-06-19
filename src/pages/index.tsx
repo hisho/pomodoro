@@ -2,6 +2,7 @@ import {useState, VFC} from "react";
 import {Counter, TimeLine, Timer} from "@src/components";
 import {convertMinutes} from "@src/helpers";
 import {pomodoroType} from "@src/components/type";
+import {Head} from "@src/layouts/head/Head";
 
 type createPomodorosType = (
   props: {
@@ -33,6 +34,7 @@ const IndexPage: VFC = () => {
 
   return (
     <main className="px-5 w-full max-w-screen-lg mx-auto lg:px-10">
+      <Head />
       <div>
         <TimeLine pomodoros={pomodoros} pomodoroIndex={pomodoroIndex}/>
       </div>
